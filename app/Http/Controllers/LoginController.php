@@ -19,11 +19,11 @@ class LoginController extends Controller
                         'idUsuario' => $user->id,
                         'nombreUsuario' => $user->name
                         );
-   
+
             return json_encode($arr);
         }
         else{
-   
+
             $arr = array('acceso' => "",'token' => "",
                         'error' => "No existe el usuario y/o contraseña",
                         'idUsuario' => 0,

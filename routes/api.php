@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MembresiasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,12 +12,20 @@ Route::get('/user', function (Request $request) {
 
 Route::post('login',[LoginController::class, 'login']);
 
-Route::get('clientes/lista', [ClientesController::class, 'listaClientesAPI']);
-Route::get('tecnicos/lista', [ClientesController::class, 'listaTecnicosAPI']);
-Route::post('polizas/lista', [PolizasController::class, 'listaPolizasAPI']);
+//Membresias
+Route::get('membresias',[MembresiasController::class, 'index']); //listar todos
+Route::get('membresias/{id}',[MembresiasController::class, 'show']);//delete
+Route::post('membresias',[MembresiasController::class, 'store']); //crear 
+Route::put('membresias/{id}', [MembresiasController::class, 'update']);
+Route::delete('membresias/{id}',[MembresiasController::class, 'destroy']);//delete
 
-Route::post('servicio/nuevo', [ServiciosController::class, 'store']);
-Route::post('servicios/eliminar', [ServiciosController::class, 'delete']);
-Route::post('servicio', [ServiciosController::class, 'index']);
 
-Route::get('servicios', [ServiciosController::class, 'list']);
+
+
+
+
+
+
+
+
+
