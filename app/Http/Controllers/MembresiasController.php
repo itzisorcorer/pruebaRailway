@@ -10,7 +10,11 @@ class MembresiasController extends Controller
     // GET /membresias (Listar todas las membresías)
     public function index()
     {
-        return response()->json(Membresia::all());
+        
+        $membresias = Membresia::join('users', 'users.id', 'membresias.id_usuario')
+        ->select('membresias.*', 'users.name as cliente')
+        ->get();
+        return $membresias;
     }
 
     // GET /membresias/{id} (Mostrar una membresía específica)
@@ -30,20 +34,18 @@ class MembresiasController extends Controller
     {
         //$validated = $request->all();
         $validated = $request->validate([
-            'id_usuario' => 'required|exists:users,id',
+            'id_usuario' => 'required|integer|exists:users,id', //validar que sea un entero
             'tipo_pago' => 'required|in:Clase,Mensual',
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'nullable|date',
+            'fecha_inicio' => 'required|date|after_or_equal:today', //no puede ser antes de hoy
+            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio', //esta fecha no puede ser menor a la fecha_inicio
             'costo' => 'required|numeric',
             'estado' => 'required|in:Activa,Vencida,Cancelada'
         ]);
 
         $membresia = Membresia::create($validated);
 
-        return response()->json([
-            'message' => 'Membresía creada exitosamente',
-            'data' => $membresia
-        ], 201);
+        return "Ok";
+        
     }
 
     // PUT /membresias/{id} (Actualizar membresía existente)

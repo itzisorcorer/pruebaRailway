@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->enum('tipo_pago', ['Clase', 'Mensual']);
             $table->date('fecha_inicio');
             $table->date('fecha_fin')->nullable();
-            $table->decimal('costo', 4, 2);
+            $table->decimal('costo', 6, 2);
             $table->enum('estado', ['Activa', 'Vencida', 'Cancelada'])->default('Activa');
             $table->timestamps();
         });
