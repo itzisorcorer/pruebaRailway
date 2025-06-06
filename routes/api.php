@@ -22,36 +22,28 @@ Route::delete('membresias/{id}',[MembresiasController::class, 'destroy']);//dele
 */
 
 
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MembresiasController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
-// Rutas públicas
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+// Autenticación
+Route::post('login', [LoginController::class, 'login']);
+Route::middleware('auth:sanctum')->post('logout', [LoginController::class, 'logout']);
 
-// Rutas protegidas con Sanctum
+// Usuario autenticado
+Route::middleware('auth:sanctum')->get('user', function (Request $request) {
+    return response()->json([
+        'user' => $request->user(),
+        'token_valid_until' => $request->user()->currentAccessToken()->expires_at
+    ]);
+});
+
+// Membresías (todas protegidas)
 Route::middleware('auth:sanctum')->group(function () {
-    // Autenticación
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::get('user', [AuthController::class, 'user']);
-    
-    // Membresías
     Route::get('membresias', [MembresiasController::class, 'index']);
-    Route::get('membresias/{id}', [MembresiasController::class, 'show']);
     Route::post('membresias', [MembresiasController::class, 'store']);
+    Route::get('membresias/{id}', [MembresiasController::class, 'show']);
     Route::put('membresias/{id}', [MembresiasController::class, 'update']);
     Route::delete('membresias/{id}', [MembresiasController::class, 'destroy']);
 });
-
-
-
-
-
-
-
-
-
-
-
