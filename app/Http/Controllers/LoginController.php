@@ -32,7 +32,6 @@ class LoginController extends Controller
         }
 
         // 3. Si la autenticación es exitosa, obtenemos el usuario y creamos el token
-        // ¡ESTA ES LA PARTE CORREGIDA!
         // No usamos $request->user(), sino que buscamos al usuario que acaba de autenticarse.
         $user = User::where('email', $request->email)->firstOrFail();
         
