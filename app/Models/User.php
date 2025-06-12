@@ -18,10 +18,22 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+     /**
+     * Valores posibles: 
+     * - 'A' => Administrador
+     * - 'T' => Técnico
+     * - 'D' => Departamento
+     */
     protected $fillable = [
         'name',
+        'apellido',
         'email',
         'password',
+        'telefono',
+        'fecha_nacimiento',
+        'id_cuenta_principal',
+        'tipo_usuario'
     ];
 
     /**
@@ -39,11 +51,32 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
     protected function casts(): array
     {
         return [
+            'fecha_nacimiento' => 'date',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'tipo_usuario' => 'string',
+
         ];
     }
+    //relacion con la cuenta principal:
+    public function cuentaPrincipal() 
+    {
+        return $this->belongsTo(User::class, 'id_cuenta_principal');
+    }
+
+
+
+    //relacion con los dependiente:
+    public function dependientes()
+    {
+        return $this->hasMany(User::class, 'id_cuenta_principal');
+    }
+
+
+
+
 }
