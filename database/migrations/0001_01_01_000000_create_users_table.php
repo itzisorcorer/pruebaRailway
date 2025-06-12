@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('apellido'); //nueva
             $table->string('email')->unique();
+            $table->string('telefono')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->date('fecha_nacimiento');
+            $table->unsignedBigInteger('id_cuenta_principal')->nullable();
+            $table->enum('tipo_usuario', ['A', 'T', 'D'])->default('A'); // Administrador, Titular, Dependiente
+            $table->foreign('id_cuenta_principal')->references('id')->on('users');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -45,5 +51,10 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::table('users', function(Blueprint $table){
+            //eliminar las FK y las columnas
+            $table->dropForeign(['id_cuenta_principal']);
+            $table->dropColumn(['apellido', 'telefono', 'fecha_nacimiento', 'id_cuenta_principal', 'tipo_usuario']);
+        });
     }
 };
