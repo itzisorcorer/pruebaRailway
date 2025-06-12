@@ -39,6 +39,8 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) {
         'token_valid_until' => $request->user()->currentAccessToken()->expires_at
     ]);
 });
+    //descomentar si se quiere hacer registro por primera vez de un usuario
+    //Route::post('usuarios', [UserController::class, 'store']);
 
 // Membresías y usuarios (todas protegidas siksi)
 Route::middleware('auth:sanctum')->group(function () {
@@ -49,10 +51,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('membresias/{id}', [MembresiasController::class, 'destroy']);
 
     //usuario (todas protegidas siksi)
-        Route::get('usuarios', [UserController::class, 'index']);
-        Route::post('usuarios', [UserController::class, 'store']);
-        Route::get('usuarios/{id}', [UserController::class, 'show']);
-        Route::put('usuarios/{id}', [UserController::class, 'update']);
-        Route::delete('usuarios/{id}', [UserController::class, 'destroy']);
+    Route::get('usuarios', [UserController::class, 'index']);
+    
+    //comentar la de abajo si se registrara por primera vez un usuario
+    Route::post('usuarios', [UserController::class, 'store']);
+    Route::get('usuarios/{id}', [UserController::class, 'show']);
+    Route::put('usuarios/{id}', [UserController::class, 'update']);
+    Route::delete('usuarios/{id}', [UserController::class, 'destroy']);
 });
 
