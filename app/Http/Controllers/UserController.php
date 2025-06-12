@@ -64,7 +64,7 @@ class UserController extends Controller
         if (!$usuario) {
             return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
-        
+
         $validated = $request->validate([
             'name' => 'sometimes|string|max:20',
             'email' => 'sometimes|email|max:50|unique:users,email,' . $id,
@@ -73,6 +73,7 @@ class UserController extends Controller
             
         ]);
         $usuario->update($validated);
+
 
         return response()->json([
             'message' => 'Usuario actualizado exitosamente',
