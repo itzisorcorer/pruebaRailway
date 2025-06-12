@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->date('fecha_nacimiento');
             $table->unsignedBigInteger('id_cuenta_principal')->nullable();
-            $table->enum('tipo_usuario', ['A', 'T', 'D'])->default('A'); // Administrador, Titular, Dependiente
+            $table->enum('tipo_usuario', ['Administrador', 'Titular', 'Dependiente'])->default('Administrador'); // Administrador, Titular, Dependiente
             $table->foreign('id_cuenta_principal')->references('id')->on('users');
             $table->rememberToken();
             $table->timestamps();

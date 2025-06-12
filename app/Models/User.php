@@ -20,10 +20,10 @@ class User extends Authenticatable
      */
 
      /**
-     * Valores posibles: 
-     * - 'A' => Administrador
-     * - 'T' => Técnico
-     * - 'D' => Departamento
+     * Valores posibles para tipo_usuario: 
+     * - Administrador
+     * - Técnico
+     * - Departamento
      */
     protected $fillable = [
         'name',
