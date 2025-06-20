@@ -24,6 +24,7 @@ Route::delete('membresias/{id}',[MembresiasController::class, 'destroy']);//dele
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MembresiasController;
+use App\Http\Controllers\ClasesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -42,6 +43,9 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     //descomentar si se quiere hacer registro por primera vez de un usuario
     //Route::post('usuarios', [UserController::class, 'store']);
 
+
+
+    Route::post('clases', [ClasesController::class, 'store']);
 // Membresías y usuarios (todas protegidas siksi)
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('membresias', [MembresiasController::class, 'index']);
@@ -58,5 +62,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('usuarios/{id}', [UserController::class, 'show']);
     Route::put('usuarios/{id}', [UserController::class, 'update']);
     Route::delete('usuarios/{id}', [UserController::class, 'destroy']);
+
+
+
+    //Toooodas las de clases
+    Route::get('clases', [ClasesController::class, 'index']);
+    //Route::post('clases', [ClasesController::class, 'store']);
+    Route::get('clases/{id}', [ClasesController::class, 'show']);
+    Route::put('clases/{id}', [ClasesController::class, 'update']);
+    Route::delete('clases/{id}', [ClasesController::class, 'destroy']);
 });
 

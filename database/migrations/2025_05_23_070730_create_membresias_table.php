@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('membresias', function (Blueprint $table) {
-            $table->id(); // ← ¡Corrige el espacio extra que tenías en "$table ->id()"!
+            $table->id();
             $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade');
             $table->enum('tipo_pago', ['Clase', 'Mensual']);
             $table->date('fecha_inicio');

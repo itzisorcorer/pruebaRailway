@@ -38,7 +38,7 @@ class MembresiasController extends Controller
             'tipo_pago' => 'required|in:Clase,Mensual',
             'fecha_inicio' => 'required|date|after_or_equal:today', //no puede ser antes de hoy
             'fecha_fin' => 'required|date|after_or_equal:fecha_inicio', //esta fecha no puede ser menor a la fecha_inicio
-            'costo' => 'required|numeric',
+            'costo' => 'required|numeric|min:20',
             'estado' => 'required|in:Activa,Vencida,Cancelada'
         ]);
 

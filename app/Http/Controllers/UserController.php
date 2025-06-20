@@ -74,11 +74,13 @@ class UserController extends Controller
         ]);
         $usuario->update($validated);
 
-
+        /*
         return response()->json([
             'message' => 'Usuario actualizado exitosamente',
             'data' => $usuario
         ]);
+        */
+        return "Ok";
     }
 
     /**
