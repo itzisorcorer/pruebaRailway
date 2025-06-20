@@ -62,7 +62,7 @@ class MembresiasController extends Controller
             'tipo_pago' => 'sometimes|in:Clase,Mensual',
             'fecha_inicio' => 'sometimes|date',
             'fecha_fin' => 'nullable|date',
-            'costo' => 'sometimes|numeric',
+            'costo' => 'sometimes|numeric|min:20',
             'estado' => 'sometimes|in:Activa,Vencida,Cancelada'
         ]);
 
