@@ -99,4 +99,42 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Usuario eliminado correctamente']);
     }
+    public function getRelaciones($idUsuario)
+    {
+        try {
+            $usuario = User::findOrFail($idUsuario);
+
+            if ($usuario->tipo_usuario == 'Titular') {
+                $relaciones = User::where('id_cuenta_principal', $idUsuario)
+                    ->select('id', 'name', 'apellido', 'email', 'telefono', 'tipo_usuario', 'fecha_nacimiento')
+                    ->get();
+
+                return response()->json([
+                    'success' => true,
+                    'tipo' => 'titular',
+                    'data' => $relaciones
+                ]);
+            } elseif ($usuario->tipo_usuario == 'Dependiente' && $usuario->id_cuenta_principal) {
+                $titular = User::select('id', 'name', 'apellido', 'email', 'telefono', 'fecha_nacimiento')
+                    ->find($usuario->id_cuenta_principal);
+
+                return response()->json([
+                    'success' => true,
+                    'tipo' => 'dependiente',
+                    'data' => $titular
+                ]);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Usuario sin relaciones registradas'
+            ], 404);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error en el servidor: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }
