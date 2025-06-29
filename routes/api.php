@@ -30,6 +30,7 @@ use App\Http\Controllers\AsistenciaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
+/*
 // Autenticación sii
 Route::post('login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [LoginController::class, 'logout']);
@@ -44,6 +45,10 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     //descomentar si se quiere hacer registro por primera vez de un usuario
     //Route::post('usuarios', [UserController::class, 'store']);
 
+*/
+Route::get('/', function () {
+    return response()->json(['status' => 'Laravel en Railway funcionando 🚀']);
+});
 
 
     //Route::post('clases', [ClasesController::class, 'store']);
