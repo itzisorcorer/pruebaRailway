@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     //Route::post('usuarios', [UserController::class, 'store']);
 
 */
+//TEMPORAL PARA LOGIN EN RAILWAY
 Route::get('/', function () {
     return response()->json(['status' => 'Laravel en Railway funcionando 🚀']);
 });
