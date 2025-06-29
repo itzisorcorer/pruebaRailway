@@ -30,7 +30,7 @@ use App\Http\Controllers\AsistenciaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-// Autenticación
+// Autenticación sii
 Route::post('login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [LoginController::class, 'logout']);
 
