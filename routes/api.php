@@ -10,7 +10,8 @@ use App\Http\Controllers\AsistenciaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-// Autenticación sii
+Route::middleware('api')->group(function(){
+    // Autenticación sii
 Route::post('login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [LoginController::class, 'logout']);
 
@@ -64,4 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Obtener relaciones (titular -> dependientes o dependiente -> titular)
     Route::get('/usuarios/relaciones/{id}', [UserController::class, 'getRelaciones']);
 });
+});
+
+
 
